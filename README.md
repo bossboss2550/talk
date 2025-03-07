@@ -1,3 +1,3 @@
 # talk
 
-https://github.com/suriyasonp/checked-in-system.git
+uvicorn main:app --reload
