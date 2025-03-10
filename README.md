@@ -1,15 +1,14 @@
-[Unit]
-Description=Audience Check-In Web
-After=network.target
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = 3000;
 
-[Service]
-ExecStart=/usr/bin/node /home/rpi/checked-in-system/audience-check-in/frontend/audience-check-in-web/server.js
-WorkingDirectory=/home/rpi/checked-in-system/audience-check-in/frontend/audience-check-in-web
-Restart=always
-User=rpi
-Group=rpi
-Environment=PATH=/usr/bin:/usr/local/bin
-Environment=NODE_ENV=production
+app.use(express.static(path.join(__dirname, 'dist/spa')));
 
-[Install]
-WantedBy=multi-user.target
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/spa/index.html'));
+});
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
