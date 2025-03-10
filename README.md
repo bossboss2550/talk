@@ -1,14 +1,15 @@
-# talk
-
 [Unit]
-Description=My Project
+Description=Audience Check-In Web
 After=network.target
 
 [Service]
-User=rpi
-WorkingDirectory=/home/rpi/checked-in-system/audience-check-in/backend
-ExecStart=/home/rpi/checked-in-system/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+ExecStart=/usr/bin/node /home/rpi/checked-in-system/audience-check-in/frontend/audience-check-in-web/server.js
+WorkingDirectory=/home/rpi/checked-in-system/audience-check-in/frontend/audience-check-in-web
 Restart=always
+User=rpi
+Group=rpi
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
 
 [Install]
 WantedBy=multi-user.target
